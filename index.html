@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>lab adem and Sofiane</title>
+</head>
+
+<body>
+<div class="wrapper">
+    <header>
+        <h1 id="main-title" >Best car of the year</h1>
+        <h4>By Sofiane and Adem</h4>
+    </header>
+    <nav class="main-nav">
+        <ul>
+            
+        </ul>
+    </nav>
+    <!--
+        Handling Events v-on
+    -->
+    <main id="app" class="main-content">
+        <h1 v-text="mainHeading"></h1>
+        
+            <h2 id="car-name" v-text="isFlipped ? '' : packages[index].package"></h2>
+            <p v-text="isFlipped ? packages[index].usage : ''"></p>
+            <a :href="packages[index].imagelink">
+                <img :src="packages[index].image" alt="Image description">
+            </a>
+            
+        </section>
+
+        
+        <div class="buttons">
+            
+            <button @click="move(-1)" type="button">Previous</button>
+            <button @click="move(1)" type="button">Next</button>
+        </div>
+
+        <p>
+            You can read more about
+            <a v-bind:href="packages[index].link" v-text="packages[index].package" target="_blank"></a>
+        </p>
+
+        <h3>NOTE:</h3>
+        <p v-html="packages[index].note"></p>
+        <hr>
+
+        <p>
+            To see other ranking you can check
+            <a :href="learnMoreUrl" target="_blank">"Rankings Driven by Research"</a>
+        </p>
+    </main>
+
+    <aside class="main-sidebar">
+        <dl>
+            <dt>Three most important criteria:</dt><br>
+            <dt>
+                Reliability and Durability:
+            </dt>
+            <dd>The reliability of a car is crucial. Consumers often seek vehicles that require minimal repairs, are durable over time, and have a good reputation for mechanical performance.
+            </dd>
+
+            <dt>
+                Fuel Efficiency:
+            </dt>
+            <dd>Nowadays,we have to look for cars that offer good fuel economy or use alternative propulsion technologies to reduce fuel consumption and emissions.
+            </dd>
+
+            <dt>
+                Safety:
+            </dt>
+            <dd> Safety is a critical criterion when choosing a car. Buyers are interested in safety features such as driver-assistance systems, emergency braking, airbags, advanced safety structures, etc.
+            </dd>
+        </dl>
+    </aside>
+
+    <footer>&copy; <span id="year"></span> - Vue.js Introduction Demo</footer>
+</div>
+
+<!-- Calling the Vue Framework first: -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<!-- Calling our data file: -->
+<script src="data/data.js"></script>
+
+<!-- Calling our JS script file/ or Internal JS code: -->
+<script src="data/script.js">
+</script>
+
+<script>
+    const javaPackagesApp = {
+        data() {
+            return {
+                mainHeading: 'Sports Cars',
+                packages,
+                isFlipped: false,
+                learnMoreUrl: 'https://cars.usnews.com/cars-trucks',
+                userInput: 'Default',
+                index: 0
+            }
+        }, // end data()
+       
+        methods: {
+            
+            move(change) {
+                if (this.packages[this.index + change]) {
+                    this.index += change;
+                    this.isFlipped = false;
+                }
+            }
+        } // end methods
+    } // end javaPackagesApp
+
+    const app = Vue.createApp(javaPackagesApp).mount("#app");
+</script>
+</body>
+
+</html>
